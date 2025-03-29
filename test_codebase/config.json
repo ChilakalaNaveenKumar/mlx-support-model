@@ -1,0 +1,29 @@
+
+{
+  "api": {
+    "baseUrl": "https://api.example.com",
+    "timeout": 5000,
+    "retryAttempts": 3
+  },
+  "auth": {
+    "tokenExpiryHours": 24,
+    "refreshTokenExpiryDays": 30,
+    "hashAlgorithm": "sha256"
+  },
+  "database": {
+    "host": "db.example.com",
+    "port": 5432,
+    "name": "userdb",
+    "maxConnections": 20
+  },
+  "features": {
+    "enableProfileCustomization": true,
+    "enableActivityFeed": true,
+    "maxUploadSizeMB": 5
+  },
+  "logging": {
+    "level": "info",
+    "enableFileLogging": true,
+    "logFilePath": "/var/log/app.log"
+  }
+}
