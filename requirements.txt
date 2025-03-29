@@ -1,0 +1,8 @@
+# Core dependencies
+mlx>=0.2.0
+mlx-lm>=0.0.7
+
+# Optional dependencies for advanced features
+huggingface_hub>=0.16.0
+safetensors>=0.3.1
+sentencepiece>=0.1.99
