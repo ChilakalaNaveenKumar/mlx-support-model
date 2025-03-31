@@ -6,8 +6,8 @@ This slim launcher delegates to the Application class.
 
 import sys
 import logging
-from services.cli_service import CLIService
-from services.application import Application
+from mlx_support_model.services.cli_service import CLIService
+from mlx_support_model.services.application import Application
 
 # Set up basic logging
 logging.basicConfig(level=logging.INFO)

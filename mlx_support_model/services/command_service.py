@@ -8,11 +8,11 @@ import logging
 from typing import Dict, Any, Optional, Callable, List
 from abc import ABC, abstractmethod
 
-from services.model_service import ModelService
-from services.chat_service import ChatService
-from services.code_service import CodeService
-from services.file_service import FileService
-from services.interactive_service import InteractiveService
+from mlx_support_model.services.model_service import ModelService
+from mlx_support_model.services.chat_service import ChatService
+from mlx_support_model.services.code_service import CodeService
+from mlx_support_model.services.file_service import FileService
+from mlx_support_model.services.interactive_service import InteractiveService
 
 logger = logging.getLogger(__name__)
 

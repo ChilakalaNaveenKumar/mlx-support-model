@@ -6,8 +6,8 @@ Handles interactive chat and code completion modes.
 import logging
 from typing import Dict, Any, Optional
 
-from services.chat_service import ChatService
-from services.code_service import CodeService
+from mlx_support_model.services.chat_service import ChatService
+from mlx_support_model.services.code_service import CodeService
 
 logger = logging.getLogger(__name__)
 

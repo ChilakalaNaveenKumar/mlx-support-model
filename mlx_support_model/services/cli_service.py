@@ -7,7 +7,7 @@ import argparse
 import logging
 from typing import Dict, Any, Optional
 
-from config import DEFAULT_MODEL, ADDITIONAL_MODELS
+from mlx_support_model.config import DEFAULT_MODEL, ADDITIONAL_MODELS
 
 logger = logging.getLogger(__name__)
 
