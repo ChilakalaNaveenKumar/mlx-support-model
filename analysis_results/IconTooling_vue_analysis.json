@@ -1,0 +1,45 @@
+{
+  "summary": "This file defines a Vue component for rendering an SVG icon, specifically the 'IconTooling' icon from the Material Design Icons set.",
+  "components": [
+    "IconTooling"
+  ],
+  "dependencies": [
+    "MaterialDesign Icons (Apache 2.0)"
+  ],
+  "functionality": "The main functionality of this file is to provide a reusable Vue component that renders a specific SVG icon. This component can be used throughout the project wherever the 'IconTooling' icon is needed.",
+  "relationships": [
+    "This file is likely part of a larger set of icon components used throughout the project.",
+    "It may be imported and used in other Vue components or templates where the 'IconTooling' icon is required."
+  ],
+  "symbols": [
+    "IconTooling"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconTooling.vue",
+  "file_name": "IconTooling.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconTooling.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconTooling.vue",
+      "type": "defines",
+      "description": "This file defines the IconTooling Vue component."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconTooling.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/index.html",
+      "type": "references",
+      "description": "The IconTooling component is likely referenced in the index.html file to be included in the project."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconTooling.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "configures",
+      "description": "The IconTooling component may be configured in the vite.config.js file for build or development purposes."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconTooling.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "styles",
+      "description": "The IconTooling component may use styles defined in the tailwind.config.js file for styling purposes."
+    }
+  ]
+}

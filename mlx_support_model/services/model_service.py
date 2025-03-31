@@ -6,7 +6,7 @@ Handles core model operations including loading, unloading, and text generation.
 import logging
 from typing import Dict, Any, Optional, Tuple, List, Union
 
-from config import (
+from mlx_support_model.config import (
     DEFAULT_MODEL,
     ADDITIONAL_MODELS,
     DEFAULT_GENERATION_PARAMS,

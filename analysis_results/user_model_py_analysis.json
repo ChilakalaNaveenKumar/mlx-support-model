@@ -1,0 +1,39 @@
+{
+  "summary": "This file defines a User model for an authentication system, including methods for managing user account status and login attempts.",
+  "components": [
+    "User class"
+  ],
+  "dependencies": [],
+  "functionality": "The User class provides methods to deactivate a user account, increment login attempts, and retrieve the user's display name. It also includes properties to manage user state such as active status and login attempts.",
+  "relationships": [
+    "This file is likely part of the authentication system and may be used by other components such as auth, SkillSection, or transform_data to manage user data."
+  ],
+  "symbols": [
+    "User",
+    "deactivate",
+    "increment_login_attempts",
+    "display_name"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/user_model.py",
+  "file_name": "user_model.py",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/user_model.py",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/auth_service.py",
+      "type": "references",
+      "description": "The User model in user_model.py is likely referenced by auth_service.py for handling user authentication and account management functionalities."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/user_model.py",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/userService.js",
+      "type": "references",
+      "description": "The User model in user_model.py might be referenced by userService.js for performing operations related to user data management, possibly through an API or service layer."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/user_model.py",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/data_processor.py",
+      "type": "references",
+      "description": "The User model in user_model.py could be referenced by data_processor.py for processing user-related data, such as aggregating user statistics or handling user data imports/exports."
+    }
+  ]
+}

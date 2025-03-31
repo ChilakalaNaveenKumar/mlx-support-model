@@ -1,0 +1,49 @@
+{
+  "summary": "This file defines a Vue component for an SVG icon representing documentation.",
+  "components": [
+    "IconDocumentation"
+  ],
+  "dependencies": [],
+  "functionality": "The main functionality of this file is to provide a reusable SVG icon component that can be used throughout the project to represent documentation.",
+  "relationships": [
+    "This file is likely used in other components or views where a documentation icon is needed.",
+    "It may be part of a larger set of icon components used for consistency in the UI."
+  ],
+  "symbols": [
+    "IconDocumentation"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconDocumentation.vue",
+  "file_name": "IconDocumentation.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconDocumentation.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/SomeComponent.vue",
+      "type": "references",
+      "description": "IconDocumentation.vue is likely referenced in SomeComponent.vue to display the documentation icon."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconDocumentation.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/App.vue",
+      "type": "references",
+      "description": "IconDocumentation.vue is likely referenced in App.vue to display the documentation icon in the main application component."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconDocumentation.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/router/index.js",
+      "type": "references",
+      "description": "IconDocumentation.vue is likely referenced in the router configuration to display the documentation icon in navigation components."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconDocumentation.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/assets/styles/icons.css",
+      "type": "imports",
+      "description": "IconDocumentation.vue may import styles from icons.css to apply specific styles to the documentation icon."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconDocumentation.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconBase.vue",
+      "type": "inherits",
+      "description": "IconDocumentation.vue may inherit from IconBase.vue to reuse common icon functionality and styling."
+    }
+  ]
+}

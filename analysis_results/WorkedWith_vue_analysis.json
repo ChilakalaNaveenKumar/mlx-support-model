@@ -1,0 +1,50 @@
+{
+  "summary": "This file defines a Vue component named 'WorkedWith' that displays a scrolling carousel of company logos.",
+  "components": [
+    "WorkedWith"
+  ],
+  "dependencies": [
+    "@/assets/modakanalytics.svg",
+    "@/assets/keylane.svg",
+    "@/assets/lifevantage.svg",
+    "@/assets/xebia.svg",
+    "../assets/main.scss"
+  ],
+  "functionality": "The component provides a scrolling animation for a set of company logos, which reverses direction when reaching the end of the container.",
+  "relationships": [
+    "This component likely fits into a larger section of the project that showcases the companies the user has worked with.",
+    "It may be used in conjunction with other components that display user profiles or work experience."
+  ],
+  "symbols": [
+    "WorkedWith",
+    "logos",
+    "scrollPosition",
+    "scrollSpeed",
+    "animationFrameId",
+    "scrollDirection",
+    "startScrollAnimation",
+    "stopScrollAnimation"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkedWith.vue",
+  "file_name": "WorkedWith.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkedWith.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/index.html",
+      "type": "references",
+      "description": "The WorkedWith component is likely referenced in the index.html file to be included in the main application."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkedWith.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "references",
+      "description": "The WorkedWith component may use Tailwind CSS classes defined in the tailwind.config.js file for styling the carousel."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkedWith.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "references",
+      "description": "The WorkedWith component is part of a Vite project, and its configuration might be influenced by settings in vite.config.js."
+    }
+  ]
+}

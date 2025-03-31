@@ -1,0 +1,17 @@
+{
+  "summary": "The jsconfig.json file is a configuration file for JavaScript projects, specifically used to set up module resolution and exclude certain directories from the project.",
+  "components": [],
+  "dependencies": [],
+  "functionality": "The file provides configuration options for the JavaScript compiler, including setting up path aliases for modules and excluding specific directories (node_modules and dist) from the project.",
+  "relationships": [
+    "This file likely relates to the project's source code structure, as it defines how modules are resolved using the '@/' alias.",
+    "It may also be related to build tools or editors that use this configuration to understand the project's structure and dependencies."
+  ],
+  "symbols": [
+    "compilerOptions",
+    "paths",
+    "exclude"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/jsconfig.json",
+  "file_name": "jsconfig.json"
+}

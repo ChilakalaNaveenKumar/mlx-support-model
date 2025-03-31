@@ -1,0 +1,99 @@
+{
+  "summary": "The .gitignore file specifies which files and directories should be ignored by Git in the project repository.",
+  "components": [],
+  "dependencies": [],
+  "functionality": "The main functionality of this file is to prevent certain files and directories, such as logs, build artifacts, and editor-specific files, from being tracked by Git.",
+  "relationships": [
+    "This file is crucial for maintaining a clean repository by excluding unnecessary files that do not need to be version-controlled.",
+    "It helps in reducing the repository size and avoiding the inclusion of sensitive or large files that are not needed in the version history."
+  ],
+  "symbols": [
+    "logs",
+    "*.log",
+    "npm-debug.log*",
+    "yarn-debug.log*",
+    "yarn-error.log*",
+    "pnpm-debug.log*",
+    "lerna-debug.log*",
+    "node_modules",
+    ".DS_Store",
+    "dist-ssr",
+    "coverage",
+    "*.local",
+    "/cypress/videos/",
+    "/cypress/screenshots/",
+    ".vscode/*",
+    "!vscode/extensions.json",
+    ".idea",
+    "*.suo",
+    "*.ntvs*",
+    "*.njsproj",
+    "*.sln",
+    "*.sw?",
+    "*.tsbuildinfo"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+  "file_name": ".gitignore",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/userService.js",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that userService.js should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/jsconfig.json",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that jsconfig.json should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/auth_service.py",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that auth_service.py should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/index.html",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that index.html should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that tailwind.config.js should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/data_processor.py",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that data_processor.py should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/user_model.py",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that user_model.py should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/config.json",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that config.json should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that vite.config.js should be ignored by Git, meaning it will not be tracked in the repository."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/.gitignore",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/README.md",
+      "type": "ignores",
+      "description": "The .gitignore file specifies that README.md should be ignored by Git, meaning it will not be tracked in the repository."
+    }
+  ]
+}

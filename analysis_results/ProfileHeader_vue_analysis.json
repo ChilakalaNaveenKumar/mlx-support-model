@@ -1,0 +1,45 @@
+{
+  "summary": "This file defines a Vue component named ProfileHeader, which displays a profile header with a status indicator, name, and title.",
+  "components": [
+    "ProfileHeader"
+  ],
+  "dependencies": [
+    "../assets/main.scss"
+  ],
+  "functionality": "The ProfileHeader component provides a user interface element to display a profile header with a status indicator showing 'Available for Work', the name 'Naveen Kumar Chilakala', and the title 'Senior Fullstack Developer I Team Lead'. It includes responsive styling for different screen sizes.",
+  "relationships": [
+    "This component might be used within a larger profile page or user interface to display user information.",
+    "It imports styles from '../assets/main.scss', suggesting it is part of a larger project with shared styles."
+  ],
+  "symbols": [
+    "ProfileHeader"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ProfileHeader.vue",
+  "file_name": "ProfileHeader.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ProfileHeader.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/userService.js",
+      "type": "imports",
+      "description": "ProfileHeader component likely imports userService.js to fetch user data for the profile header."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ProfileHeader.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/user_model.py",
+      "type": "references",
+      "description": "ProfileHeader component may reference user_model.py to understand the structure of user data it is displaying."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ProfileHeader.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "references",
+      "description": "ProfileHeader component likely references tailwind.config.js for styling purposes, using Tailwind CSS classes."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ProfileHeader.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "references",
+      "description": "ProfileHeader component may reference vite.config.js for build configurations that affect how the component is bundled and served."
+    }
+  ]
+}

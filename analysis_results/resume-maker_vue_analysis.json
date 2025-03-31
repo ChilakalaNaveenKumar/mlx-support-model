@@ -1,0 +1,48 @@
+{
+  "summary": "This file defines a Vue component for a resume maker, which includes various sections such as navigation, profile, work experience, education, skills, languages, honors, and contact information. It also implements scroll reveal animations for these sections.",
+  "components": [
+    "NavigationHeader",
+    "ProfileHeader",
+    "ProfileActions",
+    "ProfileCard",
+    "WorkedWith",
+    "WorkExperience",
+    "EducationComponent",
+    "ProfessionalSkills",
+    "LanguageCard",
+    "HonorsAndAwards",
+    "FloatingButton",
+    "ContactSection",
+    "Footer"
+  ],
+  "dependencies": [
+    "vue",
+    "./NavigationHeader.vue",
+    "./ProfileHeader.vue",
+    "./ProfileActions.vue",
+    "./ProfileCard.vue",
+    "./WorkedWith.vue",
+    "./WorkExperience.vue",
+    "./EducationComponent.vue",
+    "./ProfessionalSkills.vue",
+    "./LanguageCard.vue",
+    "./HonorsAndAwards.vue",
+    "./FloatingButton.vue",
+    "./ContactForm/ContactSection.vue",
+    "./Footer.vue"
+  ],
+  "functionality": "The main functionality of this file is to provide a structured layout for a resume maker, including multiple sections that can be filled with user data. It also includes a scroll reveal animation feature that enhances the visual experience by animating sections as they come into view.",
+  "relationships": [
+    "This file is likely part of a larger application that includes user registration and data loading functionalities, as mentioned in the project context.",
+    "It imports and uses several other Vue components, indicating a modular architecture where each section of the resume is handled by a separate component.",
+    "The scroll reveal functionality might be reused across other components or pages in the project, suggesting a potential for code reuse and consistency in animations."
+  ],
+  "symbols": [
+    "onMounted",
+    "IntersectionObserver",
+    "scroll-reveal",
+    "scroll-reveal.visible"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/resume-maker.vue",
+  "file_name": "resume-maker.vue"
+}

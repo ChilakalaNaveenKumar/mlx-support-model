@@ -1,0 +1,42 @@
+{
+  "summary": "This file defines a Vue component for the footer section of a web application, including copyright and licenses information.",
+  "components": [
+    "Footer"
+  ],
+  "dependencies": [
+    "@/assets/main.scss"
+  ],
+  "functionality": "The main functionality of this file is to provide a styled footer component that displays copyright and licenses information. It uses SCSS for styling and includes responsive design for different screen sizes.",
+  "relationships": [
+    "This file is likely part of a larger Vue application and may be imported and used in the main layout or other parent components.",
+    "It uses styles from the main.scss file, indicating a shared style configuration across the project."
+  ],
+  "symbols": [
+    "footer",
+    "footer__content",
+    "footer__copyright",
+    "footer__licenses"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/Footer.vue",
+  "file_name": "Footer.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/Footer.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/index.html",
+      "type": "references",
+      "description": "The Footer component is likely referenced in the index.html file to be included in the main application layout."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/Footer.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "uses",
+      "description": "The Footer component may use styles defined in the tailwind.config.js file for styling purposes."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/Footer.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "uses",
+      "description": "The Footer component is part of the project that is configured and built using vite.config.js, which may include settings relevant to the component."
+    }
+  ]
+}

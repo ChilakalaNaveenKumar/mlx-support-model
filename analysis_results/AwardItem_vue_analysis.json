@@ -1,0 +1,51 @@
+{
+  "summary": "This file defines a Vue component named AwardItem, which is used to display information about an award, including its title, issuer, role, description, and date.",
+  "components": [
+    "AwardItem"
+  ],
+  "dependencies": [
+    "../assets/main.scss",
+    "../assets/calendar.svg"
+  ],
+  "functionality": "The AwardItem component takes in several props (title, issuer, role, description, date) and displays them in a structured format. It also includes a styled date section with a calendar icon.",
+  "relationships": [
+    "This component is likely used within a larger awards section or list in the project, possibly in a file like AwardsList.vue or AwardsSection.vue.",
+    "It may be part of a larger user profile or achievements section, where various awards are listed."
+  ],
+  "symbols": [
+    "AwardItem",
+    "title",
+    "issuer",
+    "role",
+    "description",
+    "date"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/AwardItem.vue",
+  "file_name": "AwardItem.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/AwardItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/AwardList.vue",
+      "type": "references",
+      "description": "AwardItem.vue is likely referenced by AwardList.vue to display multiple award items."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/AwardItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/store/awards.js",
+      "type": "references",
+      "description": "AwardItem.vue may reference the awards store to fetch or display award data."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/AwardItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/assets/styles/award.css",
+      "type": "imports",
+      "description": "AwardItem.vue might import a CSS file to style the award item component."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/AwardItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/utils/dateFormatter.js",
+      "type": "imports",
+      "description": "AwardItem.vue could import a utility function to format the date of the award."
+    }
+  ]
+}

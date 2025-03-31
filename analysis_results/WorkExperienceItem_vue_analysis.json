@@ -1,0 +1,51 @@
+{
+  "summary": "This file defines a Vue component named WorkExperienceItem, which is used to display individual work experience items in a structured format, including job title, company, employment type, duration, location, and description.",
+  "components": [
+    "WorkExperienceItem"
+  ],
+  "dependencies": [
+    "../assets/main.scss",
+    "../assets/calendar.svg",
+    "../assets/location.svg"
+  ],
+  "functionality": "The component takes in a job object and an index as props, and it formats and displays the work experience details. It also processes the job description to convert it into a list format if it contains multiple points separated by double new lines or multiple spaces.",
+  "relationships": [
+    "This component is likely used within a parent component that manages a list of work experiences, such as a WorkExperienceList component.",
+    "It relies on external SVG assets for icons and a shared SCSS file for styling, indicating a modular and reusable design approach."
+  ],
+  "symbols": [
+    "WorkExperienceItem",
+    "job",
+    "index",
+    "pTag",
+    "points"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperienceItem.vue",
+  "file_name": "WorkExperienceItem.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperienceItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperienceList.vue",
+      "type": "references",
+      "description": "WorkExperienceItem is likely referenced by WorkExperienceList to display multiple work experience items."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperienceItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/assets/styles.css",
+      "type": "imports",
+      "description": "WorkExperienceItem may import styles from styles.css to apply specific styling to the work experience items."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperienceItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/store/index.js",
+      "type": "references",
+      "description": "WorkExperienceItem may reference the Vuex store to access or modify work experience data."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperienceItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/router/index.js",
+      "type": "references",
+      "description": "WorkExperienceItem may reference the Vue Router to navigate to different routes related to work experience details."
+    }
+  ]
+}

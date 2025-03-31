@@ -1,0 +1,37 @@
+{
+  "summary": "This file defines a Vue component for rendering a calendar icon using SVG.",
+  "components": [
+    "IconCalendar"
+  ],
+  "dependencies": [],
+  "functionality": "The main functionality of this file is to provide a reusable SVG icon component that can be used throughout the project to represent a calendar.",
+  "relationships": [
+    "This file is likely used in various parts of the project where a calendar icon is needed, such as in date pickers, event listings, or scheduling features.",
+    "It may be imported and used in other Vue components or templates where visual representation of a calendar is required."
+  ],
+  "symbols": [
+    "IconCalendar"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconCalendar.vue",
+  "file_name": "IconCalendar.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconCalendar.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/index.html",
+      "type": "references",
+      "description": "The IconCalendar component is likely referenced in the index.html file to be included in the main application."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconCalendar.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "references",
+      "description": "The IconCalendar component might be referenced in the vite.config.js file for configuration purposes, such as aliasing or optimization."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconCalendar.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "references",
+      "description": "The IconCalendar component might use Tailwind CSS classes defined in the tailwind.config.js file for styling."
+    }
+  ]
+}

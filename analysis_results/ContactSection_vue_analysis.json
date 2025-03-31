@@ -1,0 +1,54 @@
+{
+  "summary": "This file defines a Vue component named 'ContactSection' which is used to render a contact section on a webpage. It includes a header and actions related to contacting the user.",
+  "components": [
+    "ContactHeader",
+    "ContactActions"
+  ],
+  "dependencies": [
+    "@/assets/main.scss",
+    "./ContactHeader.vue",
+    "./ContactActions.vue"
+  ],
+  "functionality": "The main functionality of this file is to provide a structured layout for the contact section, including styling and the integration of child components for the header and actions.",
+  "relationships": [
+    "It imports and uses 'ContactHeader' and 'ContactActions' components, suggesting it is part of a larger contact form or section in the project.",
+    "It uses styles from '@/assets/main.scss', indicating it is part of a larger styling system in the project."
+  ],
+  "symbols": [
+    "ContactSection"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ContactForm/ContactSection.vue",
+  "file_name": "ContactSection.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ContactForm/ContactSection.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ContactForm/ContactHeader.vue",
+      "type": "imports",
+      "description": "ContactSection imports and uses the ContactHeader component to render the header of the contact section."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ContactForm/ContactSection.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ContactForm/ContactActions.vue",
+      "type": "imports",
+      "description": "ContactSection imports and uses the ContactActions component to render the actions related to contacting the user."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ContactForm/ContactSection.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/index.html",
+      "type": "references",
+      "description": "ContactSection is likely referenced in index.html to be included in the main application layout."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ContactForm/ContactSection.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "references",
+      "description": "ContactSection may use styles defined in tailwind.config.js for styling the contact section."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/ContactForm/ContactSection.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "references",
+      "description": "ContactSection is likely built and served by the configuration defined in vite.config.js."
+    }
+  ]
+}

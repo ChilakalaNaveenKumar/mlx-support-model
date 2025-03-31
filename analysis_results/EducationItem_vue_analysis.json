@@ -1,0 +1,57 @@
+{
+  "summary": "This file defines a Vue component named EducationItem, which is used to display educational details such as school name, degree, field of study, and the duration of study.",
+  "components": [
+    "EducationItem"
+  ],
+  "dependencies": [
+    "../assets/main.scss",
+    "../assets/calendar.svg"
+  ],
+  "functionality": "The EducationItem component takes in several props (school, degree, field, startDate, endDate) and displays them in a structured format. It also includes a responsive design that adjusts the layout based on the screen size.",
+  "relationships": [
+    "This component is likely used within a larger educational profile or resume section of the application.",
+    "It may be part of a list of EducationItem components, each representing a different educational background of a user."
+  ],
+  "symbols": [
+    "EducationItem",
+    "school",
+    "degree",
+    "field",
+    "startDate",
+    "endDate"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/EducationItem.vue",
+  "file_name": "EducationItem.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/EducationItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/SomeOtherComponent.vue",
+      "type": "references",
+      "description": "EducationItem.vue may reference another component, such as SomeOtherComponent.vue, if it includes it in its template or uses it in its logic."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/EducationItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/store/index.js",
+      "type": "references",
+      "description": "EducationItem.vue may reference the Vuex store to access or modify educational data stored in the state."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/EducationItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/assets/styles.css",
+      "type": "imports",
+      "description": "EducationItem.vue may import a CSS file to apply specific styles to the educational details it displays."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/EducationItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/services/educationService.js",
+      "type": "imports",
+      "description": "EducationItem.vue may import a service file, such as educationService.js, to fetch or manipulate educational data."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/EducationItem.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/EducationList.vue",
+      "type": "used by",
+      "description": "EducationItem.vue is likely used by a parent component, such as EducationList.vue, to display multiple educational items."
+    }
+  ]
+}

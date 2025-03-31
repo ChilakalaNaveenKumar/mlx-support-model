@@ -1,0 +1,36 @@
+{
+  "summary": "This file defines a Vue component for rendering an SVG icon representing support.",
+  "components": [
+    "IconSupport"
+  ],
+  "dependencies": [],
+  "functionality": "The main functionality of this file is to provide a reusable SVG icon component that can be used throughout the project to represent support.",
+  "relationships": [
+    "This component can be imported and used in other Vue components where a support icon is needed, such as in a help section or support page."
+  ],
+  "symbols": [
+    "IconSupport"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconSupport.vue",
+  "file_name": "IconSupport.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconSupport.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/index.html",
+      "type": "references",
+      "description": "The IconSupport component is likely referenced in the index.html file to be included in the main application."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconSupport.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "references",
+      "description": "The IconSupport component might be configured or included in the build process through vite.config.js."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/icons/IconSupport.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "references",
+      "description": "The IconSupport component may use Tailwind CSS classes defined in tailwind.config.js for styling."
+    }
+  ]
+}

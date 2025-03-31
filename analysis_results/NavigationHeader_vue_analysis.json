@@ -1,0 +1,46 @@
+{
+  "summary": "This file defines a Vue component for a navigation header with a responsive menu and tab navigation functionality.",
+  "components": [
+    "toggleMenu",
+    "setActiveTab",
+    "isActiveTab",
+    "increment",
+    "handleScroll"
+  ],
+  "dependencies": [
+    "vue"
+  ],
+  "functionality": "The component provides a navigation header with a hamburger menu for mobile devices and a tab navigation system for desktop. It includes smooth scrolling to sections and a contact button that increments a counter and scrolls to a contact section.",
+  "relationships": [
+    "This component likely interacts with other components that define the sections of the page (e.g., Home, Profile, Experience) to which it navigates.",
+    "It may also be related to a store or state management system if the counter or active tab state needs to be shared across the application."
+  ],
+  "symbols": [
+    "tabs",
+    "activeTab",
+    "count",
+    "isMenuOpen"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/NavigationHeader.vue",
+  "file_name": "NavigationHeader.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/NavigationHeader.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/index.html",
+      "type": "references",
+      "description": "NavigationHeader.vue is likely referenced in index.html to be included in the main application layout."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/NavigationHeader.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/tailwind.config.js",
+      "type": "references",
+      "description": "NavigationHeader.vue may use Tailwind CSS classes defined in tailwind.config.js for styling the navigation header."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/NavigationHeader.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/vite.config.js",
+      "type": "references",
+      "description": "NavigationHeader.vue is part of the project that is configured and built using vite.config.js."
+    }
+  ]
+}

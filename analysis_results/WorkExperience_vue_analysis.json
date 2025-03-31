@@ -1,0 +1,50 @@
+{
+  "summary": "This file defines a Vue component for displaying work experience, including a timeline of jobs with detailed descriptions.",
+  "components": [
+    "WorkExperienceItem"
+  ],
+  "dependencies": [
+    "WorkExperienceItem.vue",
+    "../assets/sparkle.svg",
+    "../assets/main.scss"
+  ],
+  "functionality": "The component renders a section titled 'Work Experience' with a timeline of jobs, each job's details are displayed using the WorkExperienceItem component. It includes a header with an icon and a description, and a timeline line to visually represent the sequence of jobs.",
+  "relationships": [
+    "It uses the WorkExperienceItem component to render individual job entries.",
+    "It imports a sparkle icon from the assets folder for visual representation.",
+    "It uses styles from main.scss for styling the component.",
+    "It might be included in a larger layout or profile page to display work experience."
+  ],
+  "symbols": [
+    "WorkExperience",
+    "jobs"
+  ],
+  "file_path": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperience.vue",
+  "file_name": "WorkExperience.vue",
+  "identified_relationships": [
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperience.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperienceItem.vue",
+      "type": "imports",
+      "description": "WorkExperience.vue imports the WorkExperienceItem component to display individual work experience items."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperience.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/data/workExperienceData.js",
+      "type": "references",
+      "description": "WorkExperience.vue likely references workExperienceData.js to fetch or display work experience data."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperience.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/styles/tailwind.css",
+      "type": "references",
+      "description": "WorkExperience.vue likely references tailwind.css for styling the work experience timeline and items."
+    },
+    {
+      "source": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/components/WorkExperience.vue",
+      "target": "/Users/chilakalanaveenkumar/mlx support model/test_codebase/src/router/index.js",
+      "type": "references",
+      "description": "WorkExperience.vue might reference the router to handle navigation to other pages related to work experience."
+    }
+  ]
+}
