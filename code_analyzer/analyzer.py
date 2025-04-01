@@ -12,15 +12,21 @@ class CodeAnalyzer:
     def __init__(self, model_service):
         """Initialize with an MLX model service."""
         self.model_service = model_service
+        
+        # We'll initialize these components later when needed
+        self.processor = None
+        self.generator = None
+        
         logger.info("Initialized code analyzer")
     
-    def analyze_project(self, project_path: str, output_dir: str = None) -> str:
+    def analyze_project(self, project_path: str, output_dir: str = None, skip_html: bool = False) -> str:
         """
         Analyze a project and generate a mind map.
         
         Args:
             project_path: Path to the project directory
             output_dir: Directory to save output files (default: current directory)
+            skip_html: Skip generating HTML mind map
             
         Returns:
             Path to the generated mind map file
@@ -41,21 +47,61 @@ class CodeAnalyzer:
         
         # Initialize components
         scanner = ProjectScanner(project_path)
-        processor = LLMProcessor(self.model_service)
-        generator = MindMapGenerator()
+        self.processor = LLMProcessor(self.model_service)
+        self.generator = MindMapGenerator()
         
         # Scan the project
         logger.info(f"Scanning project: {project_path}")
         project_files = scanner.scan_project()
         
+        # Track all analyses
+        all_analyses = []
+        new_analyses_count = 0
+        existing_analyses_count = 0
+        
+        # Check for existing consolidated analysis file
+        consolidated_path = os.path.join(output_dir, "consolidated_analysis.txt")
+        existing_analyses = {}
+        if os.path.exists(consolidated_path):
+            logger.info(f"Found existing consolidated analysis at {consolidated_path}")
+            
+            # Load existing analyses from individual files
+            for filename in os.listdir(analyses_dir):
+                if filename.endswith('_analysis.txt'):
+                    file_path = os.path.join(analyses_dir, filename)
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            content = f.read()
+                            
+                            # Extract the original file path from the content
+                            import re
+                            file_match = re.search(r'File: (.*?)\n', content)
+                            if file_match:
+                                orig_file_path = file_match.group(1).strip()
+                                existing_analyses[orig_file_path] = content
+                                logger.debug(f"Loaded existing analysis for {orig_file_path}")
+                    except Exception as e:
+                        logger.warning(f"Error loading existing analysis {file_path}: {e}")
+        
         # Process each file
         logger.info("Analyzing files...")
-        all_analyses = []
         for i, (file_path, content) in enumerate(project_files):
-            logger.info(f"Analyzing file {i+1}/{len(project_files)}: {os.path.basename(file_path)}")
+            # Check if analysis already exists for this file
+            if file_path in existing_analyses:
+                logger.info(f"Skipping analysis for already processed file ({i+1}/{len(project_files)}): {os.path.basename(file_path)}")
+                all_analyses.append(existing_analyses[file_path])
+                existing_analyses_count += 1
+                
+                # Add to processor context
+                analysis = self._extract_analysis_from_text(existing_analyses[file_path])
+                self.processor.project_context["components"][file_path] = analysis
+                self.processor._update_project_context(file_path, analysis)
+                continue
+                
+            logger.info(f"Analyzing file ({i+1}/{len(project_files)}): {os.path.basename(file_path)}")
             
             # Analyze file
-            analysis = processor.analyze_file(file_path, content)
+            analysis = self.processor.analyze_file(file_path, content)
             
             # Create a formatted analysis text
             analysis_text = self._format_analysis_for_file(file_path, analysis, content)
@@ -70,13 +116,13 @@ class CodeAnalyzer:
                     f.write(analysis_text)
                     
                 all_analyses.append(analysis_text)
+                new_analyses_count += 1
                 
                 logger.info(f"Saved analysis to {file_analysis_path}")
             except Exception as e:
                 logger.error(f"Error saving analysis to {file_analysis_path}: {e}")
         
         # Create consolidated analysis file
-        consolidated_path = os.path.join(output_dir, "consolidated_analysis.txt")
         try:
             with open(consolidated_path, 'w', encoding='utf-8') as f:
                 f.write(f"# Consolidated Analysis for {project_path}\n\n")
@@ -86,26 +132,102 @@ class CodeAnalyzer:
                 separator = "\n" + "="*80 + "\n\n"
                 f.write(separator.join(all_analyses))
                 
-            logger.info(f"Saved consolidated analysis to {consolidated_path}")
+            logger.info(f"Saved consolidated analysis to {consolidated_path} ({new_analyses_count} new, {existing_analyses_count} existing)")
         except Exception as e:
             logger.error(f"Error saving consolidated analysis: {e}")
             consolidated_path = ""
         
-        # Generate mind map
+        # Generate text mind map
         logger.info("Generating mind map...")
-        mind_map_data = processor.generate_mind_map()
-        mind_map_text = generator.generate_text_mind_map(mind_map_data)
+        mind_map_data = self.processor.generate_mind_map()
+        mind_map_text = self.generator.generate_text_mind_map(mind_map_data)
         
         # Save text mind map
         project_name = os.path.basename(os.path.normpath(project_path))
         output_path = os.path.join(output_dir, f"{project_name}_mind_map.txt")
-        generator.save_mind_map(mind_map_text, output_path)
+        self.generator.save_mind_map(mind_map_text, output_path)
         
-        # Generate and save HTML mind map
-        html_output_path = os.path.join(output_dir, f"{project_name}_mind_map.html")
-        generator.visualize_html_mind_map(mind_map_data, html_output_path)
+        # Generate and save HTML mind map if not skipped
+        if not skip_html:
+            html_output_path = os.path.join(output_dir, f"{project_name}_mind_map.html")
+            try:
+                self.generator.visualize_html_mind_map(mind_map_data, html_output_path)
+                logger.info(f"HTML mind map saved to {html_output_path}")
+            except Exception as e:
+                logger.error(f"Error generating HTML mind map: {e}")
         
         return consolidated_path
+    
+    def _extract_analysis_from_text(self, analysis_text: str) -> Dict[str, Any]:
+        """Extract structured analysis from formatted text analysis."""
+        import re
+        
+        analysis = {
+            "file_path": "",
+            "name": "",
+            "description": "",
+            "imports": [],
+            "key_functionality": [],
+            "functions": [],
+            "classes": [],
+            "line_ranges": {}
+        }
+        
+        # Extract file path
+        file_match = re.search(r'File: (.*?)\n', analysis_text)
+        if file_match:
+            analysis["file_path"] = file_match.group(1).strip()
+        
+        # Extract component name
+        comp_match = re.search(r'Component: (.*?)\n', analysis_text)
+        if comp_match:
+            analysis["name"] = comp_match.group(1).strip()
+        
+        # Extract description
+        desc_match = re.search(r'Description: (.*?)(\n\n|Imports:)', analysis_text, re.DOTALL)
+        if desc_match:
+            analysis["description"] = desc_match.group(1).strip()
+        
+        # Extract imports
+        imports_section_match = re.search(r'Imports:\n(.*?)Key Functionality:', analysis_text, re.DOTALL)
+        if imports_section_match:
+            imports_section = imports_section_match.group(1).strip()
+            import_lines = imports_section.split('\n')
+            for line in import_lines:
+                line = line.strip()
+                if line.startswith('-'):
+                    # Remove line number references
+                    import_text = re.sub(r'\s*\(line(?:s)?\s+\d+(?:-\d+)?\)', '', line[1:].strip())
+                    analysis["imports"].append(import_text)
+        
+        # Extract key functionality
+        key_func_section_match = re.search(r'Key Functionality:\n(.*?)Components/Functions Defined:', analysis_text, re.DOTALL)
+        if key_func_section_match:
+            key_func_section = key_func_section_match.group(1).strip()
+            func_lines = key_func_section.split('\n')
+            for line in func_lines:
+                line = line.strip()
+                if line.startswith('-'):
+                    # Remove line number references
+                    func_text = re.sub(r'\s*\(line(?:s)?\s+\d+(?:-\d+)?\)', '', line[1:].strip())
+                    analysis["key_functionality"].append(func_text)
+        
+        # Extract functions/components
+        components_section_match = re.search(r'Components/Functions Defined:\n(.*?)(?:File size:|$)', analysis_text, re.DOTALL)
+        if components_section_match:
+            components_section = components_section_match.group(1).strip()
+            comp_lines = components_section.split('\n')
+            for line in comp_lines:
+                line = line.strip()
+                if line.startswith('-'):
+                    # Remove line number references
+                    comp_text = re.sub(r'\s*\(line(?:s)?\s+\d+(?:-\d+)?\)', '', line[1:].strip())
+                    if "class" in comp_text.lower():
+                        analysis["classes"].append(comp_text)
+                    else:
+                        analysis["functions"].append(comp_text)
+        
+        return analysis
         
     def _format_analysis_for_file(self, file_path: str, analysis: Dict[str, Any], content: str) -> str:
         """Format the analysis for a single file into a readable text format."""

@@ -133,7 +133,7 @@ Components/Functions Defined:
             "imports": [],
             "functions": [],
             "classes": [],
-            "key_functionality": [],
+            "key_functionality": [],  # Always store as a list initially
             "line_ranges": {}  # Store line number references
         }
         
@@ -254,12 +254,6 @@ Components/Functions Defined:
                             else:
                                 analysis["functions"].append(comp_text)
                                 
-        # Convert key_functionality from list to string if requested
-        if len(analysis["key_functionality"]) == 1:
-            analysis["key_functionality"] = analysis["key_functionality"][0]
-        elif len(analysis["key_functionality"]) == 0:
-            analysis["key_functionality"] = ""
-            
         return analysis
     
     def _update_project_context(self, file_path: str, analysis: Dict[str, Any]):
@@ -329,7 +323,7 @@ Key components identified: {comp_str if component_names else "None yet"}"""
             "imports": [],
             "functions": [],
             "classes": [],
-            "key_functionality": "Unknown (file not analyzed)"
+            "key_functionality": ["Unknown (file not analyzed)"]  # Consistent list format
         }
     
     def generate_mind_map(self) -> Dict[str, Any]:
@@ -398,11 +392,14 @@ Key components identified: {comp_str if component_names else "None yet"}"""
                             "description": target_comp.get("description", "")
                         })
                 
+                # Create file node, ensuring key_functionality is a list
+                functionality = component.get("key_functionality", [])
+                
                 file_node = {
                     "name": component.get("name", os.path.basename(file_path)),
                     "path": file_path,
                     "description": component.get("description", ""),
-                    "functionality": component.get("key_functionality", "")
+                    "functionality": functionality
                 }
                 
                 if children:

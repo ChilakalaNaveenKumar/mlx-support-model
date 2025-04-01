@@ -29,6 +29,7 @@ def parse_args():
     parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose logging")
     parser.add_argument("--structure-only", "-s", action="store_true", help="Only analyze directory structure, skip file content analysis")
     parser.add_argument("--file", "-f", help="Analyze a single file instead of the entire project")
+    parser.add_argument("--skip-html", action="store_true", help="Skip HTML mind map generation")
     return parser.parse_args()
 
 def main():
@@ -70,43 +71,68 @@ def main():
     
     # Determine output directory
     output_dir = args.output or os.getcwd()
+    os.makedirs(output_dir, exist_ok=True)
     
-    # Analyze a single file or full project
-    if args.file:
-        if not os.path.isfile(args.file):
-            print(f"Error: File not found: {args.file}")
-            return 1
+    try:
+        # Analyze a single file or full project
+        if args.file:
+            if not os.path.isfile(args.file):
+                print(f"Error: File not found: {args.file}")
+                return 1
+                
+            print(f"Analyzing single file: {args.file}")
             
-        print(f"Analyzing single file: {args.file}")
-        
-        # Read file content
-        try:
-            with open(args.file, 'r', encoding='utf-8') as f:
-                content = f.read()
-        except Exception as e:
-            print(f"Error reading file: {e}")
-            return 1
+            # Read file content
+            try:
+                with open(args.file, 'r', encoding='utf-8') as f:
+                    content = f.read()
+            except Exception as e:
+                print(f"Error reading file: {e}")
+                return 1
+                
+            # Create analysis file name
+            file_name = os.path.basename(args.file)
+            output_file = os.path.join(output_dir, f"{file_name}_analysis.txt")
             
-        # Create analysis file name
-        file_name = os.path.basename(args.file)
-        output_file = os.path.join(output_dir, f"{file_name}_analysis.txt")
-        
-        # Analyze file
-        analysis = analyzer.analyze_file(args.file, content)
-        
-        # Format and save analysis
-        analysis_text = analyzer._format_analysis_for_file(args.file, analysis, content)
-        
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(analysis_text)
+            # Analyze file
+            analysis = analyzer.analyze_file(args.file, content)
             
-        print(f"Analysis complete! Results saved to: {output_file}")
-    else:
-        # Analyze full project
-        print(f"Analyzing project: {args.project_path}")
-        output_path = analyzer.analyze_project(args.project_path, output_dir)
-        
-        print(f"Analysis complete! Results saved to: {output_path}")
+            # Format and save analysis
+            analysis_text = analyzer._format_analysis_for_file(args.file, analysis, content)
+            
+            with open(output_file, 'w', encoding='utf-8') as f:
+                f.write(analysis_text)
+                
+            print(f"Analysis complete! Results saved to: {output_file}")
+        else:
+            # Analyze full project
+            print(f"Analyzing project: {args.project_path}")
+            
+            # Only generate text mind map first
+            consolidated_path = analyzer.analyze_project(args.project_path, output_dir, skip_html=True)
+            
+            # Generate HTML mind map separately with error handling
+            if not args.skip_html:
+                try:
+                    print("Generating HTML mind map...")
+                    # Get mind map data
+                    mind_map_data = analyzer.processor.generate_mind_map()
+                    # Generate HTML
+                    project_name = os.path.basename(os.path.normpath(args.project_path))
+                    html_output_path = os.path.join(output_dir, f"{project_name}_mind_map.html")
+                    analyzer.generator.visualize_html_mind_map(mind_map_data, html_output_path)
+                    print(f"HTML mind map saved to: {html_output_path}")
+                except Exception as e:
+                    print(f"Error generating HTML mind map: {e}")
+                    print("Text-based mind map was still successfully generated")
+            
+            print(f"Analysis complete! Results saved to: {consolidated_path}")
+    except Exception as e:
+        print(f"Error during analysis: {e}")
+        if args.verbose:
+            import traceback
+            traceback.print_exc()
+        return 1
     
     return 0
 

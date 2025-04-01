@@ -39,10 +39,17 @@ class MindMapGenerator:
             
             # Add functionality as part of comment if available
             functionality = node.get('functionality', '')
-            if functionality and description:
-                description_text += f" - {functionality}"
-            elif functionality:
-                description_text = f" # {functionality}"
+            if functionality:
+                # Handle both string and list types for functionality
+                if isinstance(functionality, list):
+                    functionality_text = ", ".join(functionality)
+                else:
+                    functionality_text = functionality
+                    
+                if description:
+                    description_text += f" - {functionality_text}"
+                else:
+                    description_text = f" # {functionality_text}"
             
             result.append(f"{prefix}├── {node['name']}{description_text}")
             new_prefix = prefix + "│   "
@@ -145,10 +152,17 @@ class MindMapGenerator:
         comment = ""
         if description:
             comment += description
+        
         if functionality:
+            # Handle both string and list functionality types
+            if isinstance(functionality, list):
+                functionality_text = ", ".join(functionality)
+            else:
+                functionality_text = functionality
+                
             if comment:
                 comment += " - "
-            comment += functionality
+            comment += functionality_text
             
         if comment:
             comment_html = f' <span class="description"># {comment}</span>'
