@@ -1,0 +1,17 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/views/HomeView.vue
+==================================================================================================
+
+Component: HomeView
+Description: This component serves as the main view for the application's home page, displaying a welcome message or component.
+
+Imports:
+  - TheWelcome from '../TheWelcome.vue' (line 2)
+
+Key Functionality:
+  Displays the TheWelcome component within a main HTML element
+
+Components/Functions Defined:
+  - None
+
+File size: 130 bytes
+Line count: 10 lines

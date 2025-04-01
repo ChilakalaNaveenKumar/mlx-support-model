@@ -1,0 +1,24 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/main.js
+=======================================================================================
+
+Component: main.js
+Description: The main entry point of the Vue.js application, responsible for initializing the app, setting up the state management with Pinia, and routing.
+
+Imports:
+  - './assets/main.scss' from local file (line 1)
+  - { createApp } from 'vue' (line 4)
+  - { createPinia } from 'pinia' (line 5)
+  - App from './App.vue' (line 7)
+  - router from './router' (line 8)
+
+Key Functionality:
+  - Creates a Vue application instance (line 10)
+  - Sets up Pinia for state management (line 13)
+  - Sets up routing (line 14)
+  - Mounts the application to the DOM element with the id 'app' (line 16)
+
+Components/Functions Defined:
+  - None defined in this file
+
+File size: 245 bytes
+Line count: 17 lines

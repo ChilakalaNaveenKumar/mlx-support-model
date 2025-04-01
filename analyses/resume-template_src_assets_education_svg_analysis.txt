@@ -1,0 +1,17 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/assets/education.svg
+====================================================================================================
+
+Component: education.svg
+Description: This SVG file represents an educational icon, likely used in a user interface to denote educational information or sections.
+
+Imports:
+  - None (This is an SVG file and does not contain any imports or dependencies)
+
+Key Functionality:
+  The SVG file defines a graphical representation of an educational icon, including paths and fill colors
+
+Components/Functions Defined:
+  - None (This is an SVG file and does not define any classes, functions, or components)
+
+File size: 1654 bytes
+Line count: 4 lines

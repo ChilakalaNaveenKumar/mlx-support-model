@@ -1,0 +1,17 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/icons/IconSupport.vue
+================================================================================================================
+
+Component: IconSupport
+Description: This component is a Vue.js single-file component that renders an SVG icon representing support or assistance.
+
+Imports:
+  - No imports are present in this file.
+
+Key Functionality:
+  Renders an SVG icon with specific dimensions and path data
+
+Components/Functions Defined:
+  - No classes, functions, or additional components are defined in this file. It consists solely of a template section containing the SVG markup.
+
+File size: 288 bytes
+Line count: 8 lines

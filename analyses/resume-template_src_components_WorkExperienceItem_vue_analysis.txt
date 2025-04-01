@@ -1,0 +1,18 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/WorkExperienceItem.vue
+=================================================================================================================
+
+Component: WorkExperienceItem
+Description: This component displays a single work experience item, including job title, company, employment type, duration, location, and description.
+
+Imports:
+  - main.scss from ../assets/main.scss (line 69)
+
+Key Functionality:
+  - Displays job details such as title, company, employment type, duration, location, and description (lines 2-36)
+  - Transforms the job description into a paragraph followed by a list of bullet points based on double new lines or multiple spaces (lines 53-64)
+
+Components/Functions Defined:
+  - WorkExperienceItem: A Vue component that accepts job and index as props and processes the job description to format it as a list. (lines 40-66)
+
+File size: 4372 bytes
+Line count: 193 lines

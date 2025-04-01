@@ -1,0 +1,19 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/ProfileHeader.vue
+============================================================================================================
+
+Component: ProfileHeader
+Description: This component displays a profile header with a status indicator, name, and title.
+
+Imports:
+  - @use '../assets/main.scss' as * (line 32)
+
+Key Functionality:
+  - Displays a status indicator with a blinking dot and text "Available for Work" (lines 3-15)
+  - Displays the name "Naveen Kumar Chilakala" (lines 16-18)
+  - Displays the title "Senior Fullstack Developer I Team Lead" (lines 19-21)
+
+Components/Functions Defined:
+  - ProfileHeader: The main component definition (lines 26-28)
+
+File size: 2319 bytes
+Line count: 124 lines

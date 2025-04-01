@@ -1,0 +1,19 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/ProfessionalSkills.vue
+=================================================================================================================
+
+Component: ProfessionalSkills
+Description: This component displays a section of professional skills, categorized into frontend and backend frameworks and tools. It includes an icon, title, and descriptions for each category.
+
+Imports:
+  - SkillSection from './SkillSection.vue' (line 33)
+
+Key Functionality:
+  - Displays an icon and title for the professional skills section (lines 2-18)
+  - Renders two sections for frontend and backend skills using the SkillSection component (lines 20-28)
+  - Defines data properties for frontendSkills and backendSkills arrays (lines 42-53)
+
+Components/Functions Defined:
+  - ProfessionalSkills: The main component that includes the template, script, and style sections (lines 35-56)
+
+File size: 3234 bytes
+Line count: 141 lines

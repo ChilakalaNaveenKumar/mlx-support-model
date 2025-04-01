@@ -1,0 +1,31 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/resume-maker.vue
+===========================================================================================================
+
+Component: resume-maker.vue
+Description: This component serves as the main layout for a resume maker application, integrating various sub-components to display different sections of a resume.
+
+Imports:
+  - onMounted from 'vue' (line 18)
+  - NavigationHeader from "./NavigationHeader.vue" (line 19)
+  - ProfileHeader from "./ProfileHeader.vue" (line 20)
+  - ProfileActions from "./ProfileActions.vue" (line 21)
+  - ProfileCard from "./ProfileCard.vue" (line 22)
+  - WorkedWith from "./WorkedWith.vue" (line 23)
+  - WorkExperience from "./WorkExperience.vue" (line 24)
+  - EducationComponent from "./EducationComponent.vue" (line 25)
+  - ProfessionalSkills from "./ProfessionalSkills.vue" (line 26)
+  - LanguageCard from "./LanguageCard.vue" (line 27)
+  - HonorsAndAwards from "./HonorsAndAwards.vue" (line 28)
+  - FloatingButton from "./FloatingButton.vue" (line 29)
+  - ContactSection from "./ContactForm/ContactSection.vue" (line 30)
+  - Footer from "./Footer.vue" (line 31)
+
+Key Functionality:
+  - Integrates multiple sub-components to display different sections of a resume (lines 2-14)
+  - Implements scroll reveal animation for elements with the class 'scroll-reveal' (lines 33-45)
+
+Components/Functions Defined:
+  - None: This file does not define any new classes or functions, only imports and uses existing components.
+
+File size: 1630 bytes
+Line count: 59 lines

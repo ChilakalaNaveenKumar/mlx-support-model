@@ -1,0 +1,17 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/AwardItem.vue
+========================================================================================================
+
+Component: AwardItem
+Description: This component displays an award item with details such as title, issuer, role, description, and date.
+
+Imports:
+  - main.scss from ../assets/main.scss (line 54)
+
+Key Functionality:
+  Displays award details using props
+
+Components/Functions Defined:
+  - AwardItem: A Vue component that takes award details as props and displays them. (lines 26-50)
+
+File size: 2435 bytes
+Line count: 119 lines

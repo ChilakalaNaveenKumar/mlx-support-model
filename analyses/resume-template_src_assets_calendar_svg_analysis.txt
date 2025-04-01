@@ -1,0 +1,18 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/assets/calendar.svg
+===================================================================================================
+
+Component: calendar.svg
+Description: This is an SVG file representing a calendar icon, likely used for visual representation in a user interface.
+
+Imports:
+  - None (This is an SVG file and does not contain any imports or dependencies)
+
+Key Functionality:
+  Provides a visual icon of a calendar
+
+Components/Functions Defined:
+  - *`
+  - None (This file does not define any classes, functions, or components; it is purely an SVG graphic)
+
+File size: 1243 bytes
+Line count: 4 lines

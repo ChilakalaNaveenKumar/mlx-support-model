@@ -28,6 +28,8 @@ This tool scans your codebase and generates a hierarchical mind map showing the 
 
 ## Example Output
 
+### Directory Structure Mind Map
+
 ```
 project_name/
 ├── config.py                 # Configuration settings
@@ -42,6 +44,35 @@ project_name/
 │       ├── file_utils.py     # File handling utilities
 │       └── token_utils.py    # Token processing utilities
 ```
+
+### Detailed File Analysis
+
+```
+File: services/router/index.js
+========================
+
+Component: router
+Description: Configures and exports a Vue Router instance for the application
+
+Imports:
+  - createRouter, createWebHistory from 'vue-router' (lines 1-2)
+  - ResumeMaker from '@/components/resume-maker.vue' (line 3)
+
+Key Functionality:
+  - Defines routes for the application (lines 6-15)
+  - Configures the router to use HTML5 history mode (line 18)
+  - Exports the configured router instance (line 21)
+
+Components/Functions Defined:
+  - router (Vue Router instance) (lines 6-21): Configured router with defined routes
+
+File size: 428 bytes
+Line count: 24 lines
+```
+
+### Consolidated Analysis
+
+The tool also generates a consolidated analysis file containing the analyses of all files in the project, providing a comprehensive view of the entire codebase.
 
 ## Installation
 
@@ -59,11 +90,27 @@ project_name/
 python main.py /path/to/your/project
 ```
 
+### Analyzing a Single File
+
+```
+python main.py --file /path/to/your/file.py
+```
+
+### Analyzing Directory Structure Only
+
+If you only want to analyze the directory structure without processing file contents:
+
+```
+python main.py --structure-only /path/to/your/project
+```
+
 ### Optional Arguments
 
-- `--output` or `-o`: Specify output directory for mind map files
+- `--output` or `-o`: Specify output directory for analysis files
 - `--model` or `-m`: Specify MLX model to use for analysis
 - `--verbose` or `-v`: Enable verbose logging
+- `--structure-only` or `-s`: Only analyze directory structure, skip file content analysis
+- `--file` or `-f`: Analyze a single file instead of the entire project
 
 ## Requirements
 

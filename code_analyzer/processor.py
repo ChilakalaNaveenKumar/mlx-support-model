@@ -46,11 +46,17 @@ class LLMProcessor:
                 "max_tokens": 2000
             })
             
+            # Print the raw response for debugging
+            logger.debug(f"Raw LLM response for {file_path}:\n{response}")
+            
             # Parse the response
             analysis = self._parse_llm_response(response, file_path)
             
             # Update project context
             self._update_project_context(file_path, analysis)
+            
+            # Also store the raw response for reference
+            analysis['raw_response'] = response
             
             return analysis
             
@@ -67,6 +73,12 @@ class LLMProcessor:
         # Add project context summary
         context_summary = self._get_context_summary()
         
+        # Add line numbers to content for reference
+        numbered_content = ""
+        lines = content.split('\n')
+        for i, line in enumerate(lines):
+            numbered_content += f"{i+1:4d} | {line}\n"
+        
         prompt = f"""Analyze this code file and identify its components, imports, and relationships:
 
 File path: {file_path}
@@ -75,27 +87,45 @@ File name: {file_name}
 Project context so far:
 {context_summary}
 
-File content:
+File content (with line numbers):
 ```{file_ext}
-{content}
+{numbered_content}
 ```
 
 Provide the following information in your analysis:
 1. Component name (class, module, or file name)
-2. Brief description of the component's purpose
-3. Imports or dependencies on other components (by name and path if possible)
-4. Key functionality provided by this component
-5. Components or functions defined within this file
+2. Brief description of the component's purpose (1-2 sentences)
+3. Imports or dependencies:
+   - List all imports with their source modules/packages
+   - Include line numbers where imports appear
+   - List all the knowlegde gaps it may be words, sentences or concepts that need more information to understand
+   - Include line numbers where the words or terms are used
+4. Key functionality:
+   - Describe the main functionality this component provides
+   - Reference specific line numbers when relevant (e.g., "Lines 10-15: Implements user authentication")
+5. Components/functions defined:
+   - List classes, functions, or other components defined in this file
+   - Include line number ranges for each (e.g., "Lines 20-35: UserProfile class")
 
-Format your response as a simple text tree showing the component and its relationships.
+Format your response using the following structure:
+```
+Component: [name]
+Description: [brief description]
+Imports:
+  - [import1] from [source] (line X)
+  - [import2] from [source] (lines X-Y)
+Key Functionality:
+  - [description of functionality] (lines X-Y)
+  - [additional functionality] (lines X-Y)
+Components/Functions Defined:
+  - [component1] (lines X-Y): [brief description]
+  - [component2] (lines X-Y): [brief description]
+```
 """
         return prompt
     
     def _parse_llm_response(self, response: str, file_path: str) -> Dict[str, Any]:
         """Parse the LLM's response into a structured analysis."""
-        # This is a simplified parser - a real implementation would be more robust
-        lines = response.strip().split('\n')
-        
         analysis = {
             "file_path": file_path,
             "name": os.path.basename(file_path),
@@ -103,43 +133,133 @@ Format your response as a simple text tree showing the component and its relatio
             "imports": [],
             "functions": [],
             "classes": [],
-            "key_functionality": ""
+            "key_functionality": [],
+            "line_ranges": {}  # Store line number references
         }
         
-        current_section = None
+        # Extract structured information directly from the response
+        import re
         
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
-                
-            # Look for section headers
-            if "Component name:" in line or "# Component:" in line:
-                analysis["name"] = line.split(":", 1)[1].strip()
-            elif "Description:" in line or "# Description:" in line:
-                analysis["description"] = line.split(":", 1)[1].strip()
-                current_section = "description"
-            elif "Imports:" in line or "# Imports:" in line:
-                current_section = "imports"
-            elif "Key functionality:" in line or "# Functionality:" in line:
-                current_section = "key_functionality"
-            elif "Functions:" in line or "# Functions:" in line:
-                current_section = "functions"
-            elif "Classes:" in line or "# Classes:" in line:
-                current_section = "classes"
-            elif line.startswith('-') and current_section in ["imports", "functions", "classes"]:
-                item = line.lstrip('- ').strip()
-                if item and item not in analysis[current_section]:
-                    analysis[current_section].append(item)
-            elif current_section in ["description", "key_functionality"]:
-                if current_section == "description" and not analysis["description"]:
-                    analysis["description"] = line
-                elif current_section == "key_functionality":
-                    if not analysis["key_functionality"]:
-                        analysis["key_functionality"] = line
-                    else:
-                        analysis["key_functionality"] += " " + line
+        # Try to find component name
+        component_match = re.search(r'Component:\s*(.*?)(?:\n|$)', response)
+        if component_match:
+            analysis["name"] = component_match.group(1).strip()
+            
+        # Try to find description
+        description_match = re.search(r'Description:\s*(.*?)(?:\n\n|\nImports:)', response, re.DOTALL)
+        if description_match:
+            analysis["description"] = description_match.group(1).strip()
+            
+        # Try to find imports with line numbers
+        imports_section_match = re.search(r'Imports:(.*?)(?:Key Functionality:|$)', response, re.DOTALL)
+        if imports_section_match:
+            imports_section = imports_section_match.group(1).strip()
+            
+            # If imports section has "None" or no content, keep the default empty list
+            if imports_section and not imports_section.lower().startswith('none') and "None detected" not in imports_section:
+                # Extract all import lines
+                import_lines = imports_section.split('\n')
+                for line in import_lines:
+                    line = line.strip()
+                    if line and (line.startswith('-') or line.startswith('*')):
+                        # Extract the import description
+                        import_text = line[1:].strip()
+                        
+                        # Extract line numbers if available
+                        line_match = re.search(r'\((lines?\s+(\d+)(?:-(\d+))?)\)', import_text)
+                        if line_match:
+                            line_ref = line_match.group(1)  # Full line reference text
+                            start_line = int(line_match.group(2))
+                            end_line = int(line_match.group(3)) if line_match.group(3) else start_line
+                            
+                            # Remove line number reference from import text
+                            import_text = re.sub(r'\s*\(lines?\s+\d+(?:-\d+)?\)', '', import_text)
+                            
+                            # Store the import and its line range
+                            analysis["imports"].append(import_text)
+                            analysis["line_ranges"][import_text] = (start_line, end_line)
+                        else:
+                            analysis["imports"].append(import_text)
         
+        # Try to find key functionality with line numbers
+        key_func_section_match = re.search(r'Key Functionality:(.*?)(?:Components/Functions|$)', response, re.DOTALL)
+        if key_func_section_match:
+            key_func_section = key_func_section_match.group(1).strip()
+            
+            # If key functionality section has "None" or no content, keep the default empty list
+            if key_func_section and not key_func_section.lower().startswith('none') and "No specific functionality" not in key_func_section:
+                # Extract all functionality lines
+                func_lines = key_func_section.split('\n')
+                for line in func_lines:
+                    line = line.strip()
+                    if line and (line.startswith('-') or line.startswith('*')):
+                        # Extract the functionality description
+                        func_text = line[1:].strip()
+                        
+                        # Extract line numbers if available
+                        line_match = re.search(r'\((lines?\s+(\d+)(?:-(\d+))?)\)', func_text)
+                        if line_match:
+                            line_ref = line_match.group(1)  # Full line reference text
+                            start_line = int(line_match.group(2))
+                            end_line = int(line_match.group(3)) if line_match.group(3) else start_line
+                            
+                            # Remove line number reference from functionality text
+                            func_text = re.sub(r'\s*\(lines?\s+\d+(?:-\d+)?\)', '', func_text)
+                            
+                            # Store the functionality and its line range
+                            analysis["key_functionality"].append(func_text)
+                            analysis["line_ranges"][func_text] = (start_line, end_line)
+                        else:
+                            analysis["key_functionality"].append(func_text)
+        
+        # Try to find components/functions defined with line numbers
+        components_section_match = re.search(r'Components/Functions Defined:(.*?)(?:$|```)', response, re.DOTALL)
+        if components_section_match:
+            components_section = components_section_match.group(1).strip()
+            
+            # If components section has "None" or no content, keep the default empty lists
+            if components_section and not components_section.lower().startswith('none') and "No specific components" not in components_section:
+                # Extract all component lines
+                component_lines = components_section.split('\n')
+                for line in component_lines:
+                    line = line.strip()
+                    if line and (line.startswith('-') or line.startswith('*')):
+                        # Extract the component description
+                        comp_text = line[1:].strip()
+                        
+                        # Extract line numbers if available
+                        line_match = re.search(r'\((lines?\s+(\d+)(?:-(\d+))?)\)', comp_text)
+                        if line_match:
+                            line_ref = line_match.group(1)  # Full line reference text
+                            start_line = int(line_match.group(2))
+                            end_line = int(line_match.group(3)) if line_match.group(3) else start_line
+                            
+                            # Remove line number reference from component text
+                            comp_text = re.sub(r'\s*\(lines?\s+\d+(?:-\d+)?\)', '', comp_text)
+                            
+                            # Determine if this is a class or function
+                            comp_name = comp_text.split(':', 1)[0].strip() if ':' in comp_text else comp_text
+                            
+                            # Add to appropriate list
+                            if "class" in comp_text.lower():
+                                analysis["classes"].append(comp_text)
+                                analysis["line_ranges"][comp_name] = (start_line, end_line)
+                            else:
+                                analysis["functions"].append(comp_text)
+                                analysis["line_ranges"][comp_name] = (start_line, end_line)
+                        else:
+                            # No line numbers, add to appropriate list
+                            if "class" in comp_text.lower():
+                                analysis["classes"].append(comp_text)
+                            else:
+                                analysis["functions"].append(comp_text)
+                                
+        # Convert key_functionality from list to string if requested
+        if len(analysis["key_functionality"]) == 1:
+            analysis["key_functionality"] = analysis["key_functionality"][0]
+        elif len(analysis["key_functionality"]) == 0:
+            analysis["key_functionality"] = ""
+            
         return analysis
     
     def _update_project_context(self, file_path: str, analysis: Dict[str, Any]):

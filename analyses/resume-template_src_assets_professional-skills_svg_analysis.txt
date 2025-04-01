@@ -1,0 +1,18 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/assets/professional-skills.svg
+==============================================================================================================
+
+Component: professional-skills.svg
+Description: This SVG file defines a graphical representation of professional skills, likely used as an icon or graphic element in a web application or document.
+
+Imports:
+  - None (This is an SVG file and does not contain any imports or dependencies)
+
+Key Functionality:
+  Defines the visual structure of an SVG icon representing professional skills
+
+Components/Functions Defined:
+  - *`
+  - None (This file does not define any classes, functions, or other components; it is purely an SVG graphic)
+
+File size: 1751 bytes
+Line count: 7 lines

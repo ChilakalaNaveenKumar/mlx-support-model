@@ -1,0 +1,18 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/FloatingButton.vue
+=============================================================================================================
+
+Component: FloatingButton
+Description: A floating button that appears on the page when the user scrolls down and allows the user to send an email.
+
+Imports:
+  - ref, onMounted, onUnmounted from vue (line 17)
+
+Key Functionality:
+  - Toggles visibility based on scroll position (lines 35-38)
+  - Sends an email when clicked (lines 47-57)
+
+Components/Functions Defined:
+  - FloatingButton: The main component that handles the floating button's visibility and email functionality (lines 19-64)
+
+File size: 2567 bytes
+Line count: 104 lines

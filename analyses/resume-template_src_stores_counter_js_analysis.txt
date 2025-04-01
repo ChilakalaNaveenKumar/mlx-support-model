@@ -1,0 +1,20 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/stores/counter.js
+=================================================================================================
+
+Component: counter.js
+Description: This file defines a Vue.js store using Pinia for managing a counter state, including incrementing the count and computing double the count.
+
+Imports:
+  - ref, computed from vue (line 1)
+  - defineStore from pinia (line 2)
+
+Key Functionality:
+  - Manages a counter state with an initial value of 0 (lines 5-6)
+  - Provides a computed property to get double the count (line 6)
+  - Includes a function to increment the counter (lines 7-9)
+
+Components/Functions Defined:
+  - useCounterStore: A Pinia store that encapsulates the counter logic (lines 4-12)
+
+File size: 306 bytes
+Line count: 13 lines

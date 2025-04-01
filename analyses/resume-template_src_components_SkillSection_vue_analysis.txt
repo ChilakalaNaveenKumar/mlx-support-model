@@ -1,0 +1,18 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/SkillSection.vue
+===========================================================================================================
+
+Component: SkillSection
+Description: This component displays a section of skills with a title and a list of skills, each represented by a checkmark icon and a skill name.
+
+Imports:
+  - ../assets/main.scss as * from '../assets/main.scss' (line 34)
+
+Key Functionality:
+  - Renders a title and a list of skills (lines 2-14)
+  - Uses props to receive the title and skills array (lines 20-28)
+
+Components/Functions Defined:
+  - SkillSection: A Vue component that takes a title and an array of skills as props and displays them in a styled format. (lines 17-30)
+
+File size: 1747 bytes
+Line count: 89 lines

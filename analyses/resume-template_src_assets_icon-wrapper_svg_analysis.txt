@@ -1,0 +1,17 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/assets/icon-wrapper.svg
+=======================================================================================================
+
+Component: icon-wrapper.svg
+Description: This SVG file defines a graphical icon used in the project, likely as a wrapper or container for other icons or elements.
+
+Imports:
+  - None (This is an SVG file and does not contain any imports or dependencies)
+
+Key Functionality:
+  Defines the visual appearance of an icon with a rounded rectangle background and a circular icon inside
+
+Components/Functions Defined:
+  - None (This file does not define any classes, functions, or other components; it is purely an SVG graphic)
+
+File size: 1745 bytes
+Line count: 6 lines

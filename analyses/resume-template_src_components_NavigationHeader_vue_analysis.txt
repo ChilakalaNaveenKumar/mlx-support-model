@@ -1,0 +1,26 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/NavigationHeader.vue
+===============================================================================================================
+
+Component: NavigationHeader
+Description: This component provides a navigation header for a web application, including a logo, a menu toggle button, and navigation items that can be clicked to scroll to different sections of the page. It also includes a contact button that scrolls to a contact section.
+
+Imports:
+  - ref, onMounted, onUnmounted from vue (line 53)
+
+Key Functionality:
+  - Toggles the mobile menu visibility (lines 97-99)
+  - Sets the active tab and scrolls to the corresponding section (lines 66-81)
+  - Checks if a tab is active (lines 83-85)
+  - Increments a count and scrolls to the contact section (lines 87-95)
+  - Handles scroll events to update the active tab based on the visible section (lines 101-120)
+  - Adds and removes scroll event listeners on component mount and unmount (lines 123-130)
+
+Components/Functions Defined:
+  - setActiveTab: Sets the active tab and scrolls to the corresponding section (lines 66-81)
+  - isActiveTab: Checks if a tab is active (lines 83-85)
+  - increment: Increments a count and scrolls to the contact section (lines 87-95)
+  - toggleMenu: Toggles the mobile menu visibility (lines 97-99)
+  - handleScroll: Handles scroll events to update the active tab based on the visible section (lines 101-120)
+
+File size: 6193 bytes
+Line count: 297 lines

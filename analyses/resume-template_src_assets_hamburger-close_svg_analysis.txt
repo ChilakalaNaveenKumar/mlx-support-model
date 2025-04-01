@@ -1,0 +1,17 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/assets/hamburger-close.svg
+==========================================================================================================
+
+Component: hamburger-close.svg
+Description: This SVG file represents a hamburger menu close icon, typically used in web applications to indicate the action of closing a menu.
+
+Imports:
+  - None (This is an SVG file and does not contain any imports)
+
+Key Functionality:
+  Provides a visual representation of a close icon for a hamburger menu
+
+Components/Functions Defined:
+  - None (This is an SVG file and does not define any components or functions)
+
+File size: 686 bytes
+Line count: 4 lines

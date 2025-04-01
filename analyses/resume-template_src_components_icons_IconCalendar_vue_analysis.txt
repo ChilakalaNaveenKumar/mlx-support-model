@@ -1,0 +1,18 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/icons/IconCalendar.vue
+=================================================================================================================
+
+Component: IconCalendar.vue
+Description: This Vue component renders an SVG icon representing a calendar.
+
+Imports:
+  - No imports are present in this file.
+
+Key Functionality:
+  Renders an SVG calendar icon with specific dimensions and styling
+
+Components/Functions Defined:
+  - *`
+  - No classes, functions, or additional components are defined in this file. It consists solely of a template block containing SVG markup.
+
+File size: 1277 bytes
+Line count: 5 lines

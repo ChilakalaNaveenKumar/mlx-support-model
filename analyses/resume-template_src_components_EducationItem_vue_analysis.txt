@@ -1,0 +1,17 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/EducationItem.vue
+============================================================================================================
+
+Component: EducationItem
+Description: This component displays educational details such as school name, degree, field of study, and the duration of study.
+
+Imports:
+  - main.scss from ../assets/main.scss (line 46)
+
+Key Functionality:
+  Displays educational details including school name, degree, field of study, and the duration of study
+
+Components/Functions Defined:
+  - EducationItem: A Vue component that accepts props for school, degree, field, startDate, and endDate to display educational information. (lines 18-42)
+
+File size: 2382 bytes
+Line count: 125 lines

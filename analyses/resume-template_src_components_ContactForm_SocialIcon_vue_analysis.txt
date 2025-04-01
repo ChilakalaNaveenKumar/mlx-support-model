@@ -1,0 +1,18 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/ContactForm/SocialIcon.vue
+=====================================================================================================================
+
+Component: SocialIcon
+Description: This component renders a social media icon link that opens in a new tab.
+
+Imports:
+  - @/assets/main.scss as * from '@/assets/main.scss' (line 28)
+
+Key Functionality:
+  - Renders an anchor tag with a LinkedIn URL (lines 2-5)
+  - Displays an image with a source provided via props (lines 6-11)
+
+Components/Functions Defined:
+  - SocialIcon: A Vue component that accepts a 'src' prop for the icon image (lines 15-24)
+
+File size: 803 bytes
+Line count: 45 lines

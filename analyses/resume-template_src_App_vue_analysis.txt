@@ -1,0 +1,17 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/App.vue
+=======================================================================================
+
+Component: App
+Description: The App component serves as the root component of the Vue.js application, rendering the active route component using <router-view>.
+
+Imports:
+  - PortifolioApp from "./PortifolioApp.vue" (line 7, commented out)
+
+Key Functionality:
+  Renders the active route component using <router-view>
+
+Components/Functions Defined:
+  - None defined in this file
+
+File size: 166 bytes
+Line count: 12 lines

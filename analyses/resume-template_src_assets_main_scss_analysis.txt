@@ -1,0 +1,31 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/assets/main.scss
+================================================================================================
+
+Component: main.scss
+Description: This file contains the main stylesheet for the project, defining global styles and variables using SCSS syntax.
+
+Imports:
+  - @tailwind base from tailwindcss (line 1)
+  - @tailwind components from tailwindcss (line 2)
+  - @tailwind utilities from tailwindcss (line 3)
+
+Key Functionality:
+  - Defines global CSS variables for colors (lines 5-11)
+  - Sets default styles for the body element (lines 22-34)
+  - Ensures all elements use border-box box-sizing (lines 36-38)
+  - Removes default styles for anchor tags (lines 40-43)
+  - Inherits font styles for buttons (lines 45-49)
+  - Defines utility classes for text color and background color (lines 51-61)
+
+Components/Functions Defined:
+  - :root: Defines CSS variables for color themes (lines 5-11)
+  - body: Sets default styles for the body element (lines 22-34)
+  - *: Ensures all elements use border-box box-sizing (lines 36-38)
+  - a: Removes default styles for anchor tags (lines 40-43)
+  - button: Inherits font styles for buttons (lines 45-49)
+  - .text-secondary: Defines a utility class for secondary text color (lines 51-53)
+  - .bg-accent: Defines a utility class for accent background color (lines 55-57)
+  - .border-color: Defines a utility class for border color (lines 59-61)
+
+File size: 1132 bytes
+Line count: 61 lines

@@ -1,0 +1,18 @@
+File: /Users/chilakalanaveenkumar/mlx support model/test_codebase/resume-template/src/components/EducationComponent.vue
+=================================================================================================================
+
+Component: EducationComponent
+Description: This component displays the education section of a resume, including degrees and certifications from different institutions.
+
+Imports:
+  - EducationItem from './EducationItem.vue' (line 33)
+
+Key Functionality:
+  - Displays the education header with an icon and title (lines 2-11)
+  - Renders multiple EducationItem components for each educational entry (lines 13-28)
+
+Components/Functions Defined:
+  - EducationComponent: The main component that includes the education header and content (lines 35-40)
+
+File size: 3165 bytes
+Line count: 146 lines
