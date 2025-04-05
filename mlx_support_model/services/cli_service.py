@@ -1,5 +1,5 @@
 """
-CLI service for MLX models.
+CLI service for language models.
 Handles command-line argument parsing and setup.
 """
 
@@ -7,14 +7,20 @@ import argparse
 import logging
 from typing import Dict, Any, Optional
 
-from mlx_support_model.config import DEFAULT_MODEL, ADDITIONAL_MODELS
+from mlx_support_model.config import (
+    DEFAULT_MODEL, 
+    ADDITIONAL_MODELS, 
+    LLM_PROVIDER,
+    OLLAMA_ADDITIONAL_MODELS,
+    MLX_ADDITIONAL_MODELS
+)
 
 logger = logging.getLogger(__name__)
 
 
 class CLIService:
     """
-    Handles command-line interface for the MLX model application.
+    Handles command-line interface for the language model application.
     Provides argument parsing and command-line setup.
     """
     
@@ -27,8 +33,17 @@ class CLIService:
             Configured ArgumentParser instance
         """
         parser = argparse.ArgumentParser(
-            description="MLX Model File Processor",
+            description="LLM File Processor",
             formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        )
+        
+        # Provider selection
+        provider_group = parser.add_argument_group("Provider Selection")
+        provider_group.add_argument(
+            "--provider", "-p",
+            choices=["ollama", "mlx"],
+            default=LLM_PROVIDER,
+            help=f"LLM provider to use (default: {LLM_PROVIDER})"
         )
         
         # Model selection arguments
@@ -61,7 +76,7 @@ class CLIService:
         # Input arguments (non-file)
         input_group = parser.add_argument_group("Input")
         input_group.add_argument(
-            "--prompt", "-p",
+            "--prompt", "-pr",
             help="Text prompt to send to the model"
         )
         input_group.add_argument(
@@ -170,7 +185,15 @@ class CLIService:
         print("\nAvailable models:")
         print("-" * 50)
         print(f"Default: {DEFAULT_MODEL}")
-        print("\nAdditional models:")
-        for key, path in ADDITIONAL_MODELS.items():
+        
+        # Print Ollama models
+        print("\nOllama models:")
+        for key, path in OLLAMA_ADDITIONAL_MODELS.items():
             print(f"{key}: {path}")
+            
+        # Print MLX models
+        print("\nMLX models:")
+        for key, path in MLX_ADDITIONAL_MODELS.items():
+            print(f"mlx_{key}: {path}")
+        
         print()

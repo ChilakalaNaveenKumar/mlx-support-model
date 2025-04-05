@@ -1,19 +1,39 @@
 """
-Configuration module for MLX language models.
+Configuration module for language models.
 Contains settings and constants for model initialization and features.
 """
 
 import os
 
-# Default model - only load this when explicitly requested
-# DEFAULT_MODEL = "mlx-community/Qwen2.5-Coder-32B-Instruct-8bit"
-# DEFAULT_MODEL = "mlx-community/Qwen2.5-Coder-32B-Instruct-6bit"
-DEFAULT_MODEL = "mlx-community/Llama-3-8B-Instruct-4bit"
-# Additional models available
-ADDITIONAL_MODELS = {
+# LLM Provider Configuration
+# Options: 'ollama', 'mlx'
+LLM_PROVIDER = "ollama"
+
+# Ollama Configuration
+OLLAMA_DEFAULT_MODEL = "gemma3:27b"
+OLLAMA_API_BASE = "http://localhost:11434/api"
+OLLAMA_ADDITIONAL_MODELS = {
+    "codellama": "codellama",
+    "llama3": "llama3",
+    "mistral": "mistral",
+    "gemma": "gemma",
+    "phi3": "phi3",
+    "mixtral": "mixtral"
+}
+
+# MLX Configuration
+MLX_DEFAULT_MODEL = "mlx-community/Llama-3-8B-Instruct-4bit"
+MLX_ADDITIONAL_MODELS = {
     "mistral": "mlx-community/OpenHermes-2.5-Mistral-7B-4bit-mlx",
     "llama": "mlx-community/Llama-3-8B-Instruct-4bit"
 }
+
+# Choose the appropriate default model based on provider
+DEFAULT_MODEL = OLLAMA_DEFAULT_MODEL if LLM_PROVIDER == "ollama" else MLX_DEFAULT_MODEL
+
+# Additional models available - combined from both providers
+ADDITIONAL_MODELS = OLLAMA_ADDITIONAL_MODELS.copy()
+ADDITIONAL_MODELS.update({f"mlx_{k}": v for k, v in MLX_ADDITIONAL_MODELS.items()})
 
 # Generation parameters
 DEFAULT_GENERATION_PARAMS = {
@@ -27,7 +47,7 @@ DEFAULT_GENERATION_PARAMS = {
 # Cache settings
 CACHE_SETTINGS = {
     "enable_cache": True,
-    "cache_dir": os.path.join(os.path.expanduser("~"), ".mlx_cache"),
+    "cache_dir": os.path.join(os.path.expanduser("~"), ".llm_cache"),
     "max_models_cached": 3,  # Maximum number of models to keep in memory
     "tokenizer_cache_size": 5000,  # Cache size for tokenizer
     "max_file_cache_entries": 100,  # Maximum number of file results to cache
@@ -46,7 +66,7 @@ CHAT_SETTINGS = {
     "system_prompt": "You are a helpful, accurate AI assistant with expertise in programming. Answer questions, explain concepts, and help with code.",
     "chat_template": "default",   # Template for chat formatting
     "save_history": True,         # Whether to save chat history
-    "history_file": os.path.join(os.path.expanduser("~"), ".mlx_chat_history"),
+    "history_file": os.path.join(os.path.expanduser("~"), ".llm_chat_history"),
     "max_history_turns": 20       # Maximum number of turns to keep in history
 }
 

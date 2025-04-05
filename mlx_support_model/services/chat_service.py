@@ -1,15 +1,16 @@
 """
-Chat service for MLX models.
+Chat service for language models.
 Handles chat-specific functionality including history management.
 """
 
 import os
 import json
 import logging
-from typing import Dict, Any, Optional, List, Tuple
+from typing import Dict, Any, Optional, List, Tuple, Union
 
-from mlx_support_model.config import CHAT_SETTINGS
+from mlx_support_model.config import CHAT_SETTINGS, LLM_PROVIDER
 from mlx_support_model.services.model_service import ModelService
+from mlx_support_model.services.ollama_service import OllamaService
 from mlx_support_model.services.utils.prompt_utils import format_chat_prompt
 
 logger = logging.getLogger(__name__)
@@ -21,12 +22,12 @@ class ChatService:
     Maintains conversation history and manages chat-specific formatting.
     """
     
-    def __init__(self, model_service: ModelService):
+    def __init__(self, model_service: Union[ModelService, OllamaService]):
         """
         Initialize the chat service.
         
         Args:
-            model_service: ModelService instance to use for generation
+            model_service: ModelService or OllamaService instance to use for generation
         """
         self.model_service = model_service
         self.chat_history = []
@@ -148,14 +149,19 @@ class ChatService:
         # Add current user message
         messages.append({"role": "user", "content": user_message})
         
-        # Format as chat prompt
-        formatted_prompt = format_chat_prompt(messages, self.model_service.tokenizer)
+        # Handle based on service type
+        if isinstance(self.model_service, OllamaService):
+            # Ollama has native chat support
+            logger.info("Using Ollama's native chat API")
+            assistant_response = self.model_service.chat_completion(messages, params)
+        else:
+            # MLX needs formatted prompt
+            logger.info("Using MLX with formatted chat prompt")
+            formatted_prompt = format_chat_prompt(messages, self.model_service.tokenizer)
+            assistant_response = self.model_service.generate_text(formatted_prompt, params)
         
         # Add user message to history
         self.add_message("user", user_message)
-        
-        # Generate response
-        assistant_response = self.model_service.generate_text(formatted_prompt, params)
         
         # Add assistant response to history
         self.add_message("assistant", assistant_response)

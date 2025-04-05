@@ -1,5 +1,5 @@
 """
-File service for MLX models.
+File service for language models.
 Handles file operations including reading, writing, and format detection.
 """
 
@@ -8,6 +8,7 @@ import logging
 from typing import Dict, Any, Optional, Tuple, List, Union
 
 from mlx_support_model.services.model_service import ModelService
+from mlx_support_model.services.ollama_service import OllamaService
 from mlx_support_model.services.code_service import CodeService
 from mlx_support_model.services.utils.file_utils import read_file, write_file, create_file_hash, get_file_size
 from mlx_support_model.services.utils.code_utils import detect_language
@@ -18,19 +19,19 @@ logger = logging.getLogger(__name__)
 
 class FileService:
     """
-    Handles file operations for the MLX model interface.
+    Handles file operations for the model interface.
     Manages reading, writing, and processing files.
     """
     
     def __init__(self, 
-                model_service: ModelService,
+                model_service: Union[ModelService, OllamaService],
                 code_service: Optional[CodeService] = None,
                 cache_service: Optional[CacheService] = None):
         """
         Initialize the file service.
         
         Args:
-            model_service: ModelService instance for processing
+            model_service: ModelService or OllamaService instance for processing
             code_service: Optional CodeService for code-specific operations
             cache_service: Optional CacheService for caching
         """
@@ -198,6 +199,24 @@ Converted {target_format}:
         # Generate conversion
         logger.info(f"Converting {file_path} from {source_format} to {target_format}")
         result = self.model_service.generate_text(prompt, generation_params)
+        
+        # Process result for Ollama which might include markdown formatting
+        if isinstance(self.model_service, OllamaService) and "```" in result:
+            try:
+                # Try to extract the converted content from code blocks
+                parts = result.split("```")
+                if len(parts) > 1:
+                    # Check if the first line is just a format identifier
+                    content_part = parts[1].strip()
+                    lines = content_part.split("\n")
+                    if len(lines) > 1 and lines[0].strip() in [target_format, target_format.lower()]:
+                        # Remove the format identifier line
+                        content_part = "\n".join(lines[1:])
+                    return True, content_part
+            except Exception as e:
+                logger.warning(f"Error extracting converted content: {e}")
+                # Fall back to original result
+                return True, result
         
         return True, result
     

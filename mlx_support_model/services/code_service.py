@@ -1,5 +1,5 @@
 """
-Code service for MLX models.
+Code service for language models.
 Handles code-specific functionality including FIM and code completion.
 """
 
@@ -8,6 +8,7 @@ from typing import Dict, Any, Optional, Tuple, List, Union
 
 from mlx_support_model.config import FIM_SETTINGS
 from mlx_support_model.services.model_service import ModelService
+from mlx_support_model.services.ollama_service import OllamaService
 from mlx_support_model.services.utils.code_utils import (
     detect_language, 
     find_cursor_position,
@@ -28,12 +29,12 @@ class CodeService:
     Provides code completion and FIM (Fill-in-Middle) functionality.
     """
     
-    def __init__(self, model_service: ModelService):
+    def __init__(self, model_service: Union[ModelService, OllamaService]):
         """
         Initialize the code service.
         
         Args:
-            model_service: ModelService instance to use for generation
+            model_service: ModelService or OllamaService instance to use for generation
         """
         self.model_service = model_service
         logger.info("Code service initialized")
@@ -92,6 +93,56 @@ class CodeService:
         
         return False, None, None
     
+    def _format_completion_prompt(self, prefix: str, suffix: Optional[str] = None, language: Optional[str] = None) -> str:
+        """
+        Format a prompt for code completion based on service type.
+        
+        Args:
+            prefix: Code prefix
+            suffix: Optional code suffix
+            language: Optional programming language
+            
+        Returns:
+            Formatted prompt
+        """
+        # Determine language if not provided
+        lang = language or detect_language(f"file.{language}" if language else "file.py")
+        
+        # For Ollama, create a more explicit prompt
+        if isinstance(self.model_service, OllamaService):
+            if suffix:
+                # Fill-in-Middle case
+                return f"""Complete the code between the PREFIX and SUFFIX. 
+The code should fit perfectly between them, so make sure the completed code leads smoothly into the suffix.
+
+Language: {lang}
+
+PREFIX:
+```{lang}
+{prefix}
+```
+
+SUFFIX:
+```{lang}
+{suffix}
+```
+
+Completed code without PREFIX/SUFFIX markers:
+"""
+            else:
+                # Standard completion case
+                return f"""Complete the following {lang} code. Continue from where it left off:
+
+```{lang}
+{prefix}
+```
+
+Completed code:
+"""
+        else:
+            # For MLX, use the FIM format
+            return format_fim_prompt(prefix, suffix or "")
+    
     def complete_code(self, 
                     code: str, 
                     suffix: Optional[str] = None,
@@ -112,7 +163,7 @@ class CodeService:
             Completed code
         """
         if not self.model_service.is_loaded():
-            return "Error: Model not loaded. Please load a model first."
+            return "Error: No model loaded. Please load a model first."
         
         # Detect language if not provided
         if not language:
@@ -131,8 +182,8 @@ class CodeService:
         # Optimize prefix and suffix if they're too long
         prefix, suffix = optimize_prompt_for_completion(prefix, suffix or "")
         
-        # Format for FIM
-        formatted_prompt = format_fim_prompt(prefix, suffix or "")
+        # Format prompt according to service type
+        formatted_prompt = self._format_completion_prompt(prefix, suffix, language)
         
         # Set parameters optimized for code completion
         generation_params = {
@@ -150,23 +201,41 @@ class CodeService:
         logger.info(f"Generating code completion for {language} code")
         completion = self.model_service.generate_text(formatted_prompt, generation_params)
         
-        # Extract the middle part (the completion)
-        if FIM_SETTINGS['prefix_suffix_separator'] in completion:
-            # Split on separator and take the part before the suffix
-            completion_parts = completion.split(FIM_SETTINGS['prefix_suffix_separator'])
-            completion_part = completion_parts[0]
-            
-            # Remove the original prefix if it's repeated in the response
-            if completion_part.startswith(prefix):
-                completion_part = completion_part[len(prefix):]
-                
-            return completion_part
-        else:
-            # If no separator in response, return the full completion
-            # minus the prefix if it's repeated
-            if completion.startswith(prefix):
-                completion = completion[len(prefix):]
+        # Process result based on service type
+        if isinstance(self.model_service, OllamaService):
+            # Ollama may include the backticks in response, clean those up
+            if "```" in completion:
+                # Extract code from markdown code block
+                try:
+                    cleaned = completion.split("```")[1]
+                    # Check if first line is language identifier
+                    lines = cleaned.strip().split("\n")
+                    if len(lines) > 1 and not any(c in lines[0] for c in "{}();="):
+                        # First line is likely language identifier, remove it
+                        cleaned = "\n".join(lines[1:])
+                    return cleaned
+                except IndexError:
+                    # Fallback if splitting fails
+                    return completion.replace("```", "")
             return completion
+        else:
+            # MLX with FIM processing
+            if FIM_SETTINGS['prefix_suffix_separator'] in completion:
+                # Split on separator and take the part before the suffix
+                completion_parts = completion.split(FIM_SETTINGS['prefix_suffix_separator'])
+                completion_part = completion_parts[0]
+                
+                # Remove the original prefix if it's repeated in the response
+                if completion_part.startswith(prefix):
+                    completion_part = completion_part[len(prefix):]
+                    
+                return completion_part
+            else:
+                # If no separator in response, return the full completion
+                # minus the prefix if it's repeated
+                if completion.startswith(prefix):
+                    completion = completion[len(prefix):]
+                return completion
     
     def analyze_code(self, 
                    code: str, 
@@ -231,7 +300,7 @@ Provide a comprehensive analysis including:
             Refactored code
         """
         if not self.model_service.is_loaded():
-            return "Error: Model not loaded. Please load a model first."
+            return "Error: No model loaded. Please load a model first."
         
         # Detect language if not provided
         if not language:
@@ -266,7 +335,33 @@ Refactored code:
         logger.info(f"Refactoring {language} code")
         result = self.model_service.generate_text(prompt, generation_params)
         
-        # Extract code from the response
-        refactored_code = result.split("```")[0].strip()
-        
-        return refactored_code
+        # Process result based on service type
+        if isinstance(self.model_service, OllamaService):
+            # Ollama may include the backticks in response, clean those up
+            if "```" in result:
+                # Extract code from markdown code block
+                try:
+                    cleaned = result.split("```")[1]
+                    # Check if first line is language identifier
+                    lines = cleaned.strip().split("\n")
+                    if len(lines) > 1 and not any(c in lines[0] for c in "{}();="):
+                        # First line is likely language identifier, remove it
+                        cleaned = "\n".join(lines[1:])
+                    return cleaned
+                except IndexError:
+                    # Fallback if splitting fails
+                    return result.replace("```", "")
+            return result
+        else:
+            # For MLX, extract code from the response
+            result_parts = result.split("```")
+            if len(result_parts) > 1:
+                refactored_code = result_parts[1].strip()
+                # Check if the first line is a language identifier
+                lines = refactored_code.split('\n')
+                if len(lines) > 1 and lines[0].strip() in [language, language.lower()]:
+                    refactored_code = '\n'.join(lines[1:])
+                return refactored_code
+            
+            # Fallback - return the raw response
+            return result
