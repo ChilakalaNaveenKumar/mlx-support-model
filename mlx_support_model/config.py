@@ -7,7 +7,8 @@ import os
 
 # Default model - only load this when explicitly requested
 # DEFAULT_MODEL = "mlx-community/Qwen2.5-Coder-32B-Instruct-8bit"
-DEFAULT_MODEL = "mlx-community/Qwen2.5-Coder-32B-Instruct-6bit"
+# DEFAULT_MODEL = "mlx-community/Qwen2.5-Coder-32B-Instruct-6bit"
+DEFAULT_MODEL = "mlx-community/Llama-3-8B-Instruct-4bit"
 # Additional models available
 ADDITIONAL_MODELS = {
     "mistral": "mlx-community/OpenHermes-2.5-Mistral-7B-4bit-mlx",
