@@ -37,6 +37,9 @@ ENV/
 *.swo
 .DS_Store
 
+qa_output/
+LLaMA-Factory/
+
 # MLX specific
 *.mlxmodel
 *.safetensors
